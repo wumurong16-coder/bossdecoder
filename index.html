@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boss Decoder - 老板解码器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    <h1>Boss Decoder</h1>
+                </div>
+                <div class="header-subtitle">智能商务沟通分析工具</div>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 左侧：输入和分析结果 -->
+            <div class="content-panel">
+                <!-- 输入区域 -->
+                <section class="input-section">
+                    <div class="section-header">
+                        <h2>消息输入</h2>
+                        <span class="section-badge">分析引擎</span>
+                    </div>
+                    <div class="input-container">
+                        <textarea 
+                            id="messageInput" 
+                            class="message-input" 
+                            placeholder="粘贴或输入老板的消息文本..."
+                            rows="6"
+                        ></textarea>
+                        <div class="input-footer">
+                            <div class="char-count">
+                                <span id="charCount">0</span> 字符
+                            </div>
+                            <button id="analyzeBtn" class="analyze-btn">
+                                <span class="btn-icon">📊</span>
+                                <span class="btn-text">开始分析</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 分析结果区域 -->
+                <section class="results-section" id="resultsSection" style="display: none;">
+                    <!-- 加载动画 -->
+                    <div class="loading-overlay" id="loadingOverlay">
+                        <div class="loading-spinner"></div>
+                        <p>正在分析中...</p>
+                    </div>
+
+                    <!-- 语气识别 -->
+                    <div class="result-card tone-card">
+                        <div class="card-header">
+                            <h3>语气识别</h3>
+                            <span class="card-icon">🎭</span>
+                        </div>
+                        <div class="tone-display">
+                            <div class="tone-badge" id="toneBadge">
+                                <span class="tone-label">分析中...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 怒气值仪表盘 -->
+                    <div class="result-card anger-card">
+                        <div class="card-header">
+                            <h3>怒气值评估</h3>
+                            <span class="card-icon">⚡</span>
+                        </div>
+                        <div class="anger-display">
+                            <div class="anger-value">
+                                <span class="value-number" id="angerValue">0</span>
+                                <span class="value-unit">%</span>
+                            </div>
+                            <div class="anger-bar-container">
+                                <div class="anger-bar" id="angerBar">
+                                    <div class="anger-fill" id="angerFill"></div>
+                                </div>
+                            </div>
+                            <div class="anger-level" id="angerLevel">-</div>
+                            <div class="anger-reason" id="angerReason" style="display: none;"></div>
+                        </div>
+                    </div>
+
+                    <!-- 智能回复建议 -->
+                    <div class="result-card replies-card">
+                        <div class="card-header">
+                            <h3>智能回复建议</h3>
+                            <span class="card-icon">💡</span>
+                        </div>
+                        <div class="replies-list" id="repliesList">
+                            <!-- 回复建议将动态插入这里 -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 右侧：历史记录侧边栏 -->
+            <aside class="history-sidebar">
+                <div class="sidebar-header">
+                    <h3>分析历史</h3>
+                    <button class="clear-history-btn" id="clearHistoryBtn" title="清空历史">🗑️</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <div class="history-empty">
+                        <p>暂无历史记录</p>
+                        <span>分析结果将自动保存</span>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- 配置文件 -->
+    <script src="config.js"></script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- 主应用逻辑 -->
+    <script src="app.js"></script>
+</body>
+</html>
+
